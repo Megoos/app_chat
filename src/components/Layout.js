@@ -54,7 +54,7 @@ class Layout extends Component {
           <div>You, {user.name}!</div>
         )}
 
-        <OnlineUsers socket={socket} />
+        <OnlineUsers socket={socket} user={user} />
       </div>
     );
   }

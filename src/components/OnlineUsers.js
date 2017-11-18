@@ -12,27 +12,37 @@ class OnlineUsers extends Component {
 
   componentDidMount() {
     const { socket } = this.props;
-    this.initSocket(socket);
+    //socket.emit
+    socket.on(ONLINE_USERS, this.resetUser());
   }
 
-  initSocket(socket) {
-    socket.on('connect', () => {
-      socket.emit(ONLINE_USERS, this.resetUser);
-    });
-  }
+  resetUser = () => {
+    return user => {
+      //const { users } = this.state;
+      let newUsers = [];
+      for (let key in user) {
+        newUsers.push(user[key]);
+      }
 
-  resetUser = obj => {
-    for (var key in obj) {
-      console.log(key);
-    }
-
-    console.log('------');
+      this.setState({ users: newUsers });
+    };
   };
 
   render() {
+    const { users } = this.state;
+    const { user } = this.props;
     return (
       <div className="container">
-        <h3>online</h3>
+        <h3>Users online:</h3>
+        <ul>
+          {users.map(userItem => {
+            if (user === null || user.name !== userItem.name) {
+              return <li key={userItem.id}>{userItem.name}</li>;
+            } else {
+              return '';
+            }
+          })}
+        </ul>
       </div>
     );
   }

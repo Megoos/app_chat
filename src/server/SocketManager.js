@@ -15,7 +15,7 @@ const {
 const { createUser, createMessage, createChat } = require('../Action');
 
 let connectedUsers = {
-  dfsdf: { id: '261b661f-a1d9-47cc-beed-01b88bd8aaa5', name: 'dfsdf' }
+  dfsdf: { id: '261b661f-a1d9-47cc-beed-01b88bd8aaa5', name: 'Boris' }
 };
 
 module.exports = function(socket) {
@@ -37,6 +37,7 @@ module.exports = function(socket) {
     socket.user = user;
 
     io.emit(USER_CONNECTED, connectedUsers);
+    io.emit(ONLINE_USERS, connectedUsers);
     console.log(connectedUsers);
   });
 
@@ -46,6 +47,7 @@ module.exports = function(socket) {
       connectedUsers = removeUser(connectedUsers, socket.user.name);
 
       io.emit(USER_DISCONNECTED, connectedUsers);
+      io.emit(ONLINE_USERS, connectedUsers);
       console.log('Disconnect', connectedUsers);
     }
   });
@@ -57,11 +59,7 @@ module.exports = function(socket) {
     console.log('Disconnect', connectedUsers);
   });
 
-  //Online User
-  socket.on(ONLINE_USERS, callback => {
-    callback(connectedUsers);
-    io.emit(ONLINE_USERS, connectedUsers);
-  });
+  socket.emit(ONLINE_USERS, connectedUsers);
 };
 
 function addUser(userList, user) {
