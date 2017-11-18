@@ -35,7 +35,6 @@ export default class MessageInput extends Component {
 
   /*
 	*	startCheckingTyping
-	*	Start an interval that checks if the user is typing.
 	*/
   startCheckingTyping = () => {
     console.log('Typing');
@@ -49,7 +48,6 @@ export default class MessageInput extends Component {
 
   /*
 	*	stopCheckingTyping
-	*	Start the interval from checking if the user is typing.
 	*/
   stopCheckingTyping = () => {
     console.log('Stop Typing');
@@ -72,7 +70,7 @@ export default class MessageInput extends Component {
             className="form-control"
             value={message}
             autoComplete={'off'}
-            placeholder="Type something interesting"
+            placeholder="Type your message"
             onKeyUp={e => {
               e.keyCode !== 13 && this.sendTyping();
             }}
@@ -82,8 +80,7 @@ export default class MessageInput extends Component {
             disabled={!user}
           />
           <button disabled={message.length < 1} type="submit" className="send">
-            {' '}
-            Send{' '}
+            Send
           </button>
         </form>
       </div>

@@ -5,7 +5,7 @@ class ChatHeader extends Component {
   render() {
     const { name } = this.props;
 
-    return <div>{name}</div>;
+    return <div className="chat-name">{name}</div>;
   }
 }
 

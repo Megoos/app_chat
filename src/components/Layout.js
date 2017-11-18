@@ -42,15 +42,16 @@ class Layout extends Component {
     const { title } = this.props;
     return (
       <div className="container">
-        <h2>{title}</h2>
-        {!user ? (
-          <LoginForm socket={socket} setUser={this.setUser} />
-        ) : (
-          <div>You, {user.name}!</div>
-        )}
+        <div className="sidebar">
+          <div className="head">{title}</div>
+          {!user ? (
+            <LoginForm socket={socket} setUser={this.setUser} />
+          ) : (
+            <div className="login include">Your name: {user.name}</div>
+          )}
 
-        <OnlineUsers socket={socket} user={user} />
-
+          <OnlineUsers socket={socket} user={user} />
+        </div>
         <ChatContainer socket={socket} user={user} />
       </div>
     );

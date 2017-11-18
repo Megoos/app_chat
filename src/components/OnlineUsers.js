@@ -32,17 +32,20 @@ class OnlineUsers extends Component {
     const { users } = this.state;
     const { user } = this.props;
     return (
-      <div className="container">
+      <div className="online">
         <h3>Users online:</h3>
-        <ul>
-          {users.map(userItem => {
-            if (user === null || user.name !== userItem.name) {
-              return <li key={userItem.id}>{userItem.name}</li>;
-            } else {
-              return '';
-            }
-          })}
-        </ul>
+
+        {users.map(userItem => {
+          if (user === null || user.name !== userItem.name) {
+            return (
+              <div className="online-item" key={userItem.id}>
+                {userItem.name}
+              </div>
+            );
+          } else {
+            return '';
+          }
+        })}
       </div>
     );
   }

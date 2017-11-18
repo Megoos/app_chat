@@ -1,5 +1,224 @@
-body {
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+input,
+textarea {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.container {
+  color: #2c9fe2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  max-width: 720px;
+  max-height: 600px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+  height: 100%;
+  margin-right: 10px;
+}
+
+.sidebar .head {
+  border: 3px solid #2c9fe2;
+  border-radius: 12px;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.login {
+  width: 100%;
+  height: 100%;
+  height: 135px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #2c9fe2;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-form input {
+  max-width: 80%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  height: 20px;
+  line-height: 20px;
+  font-size: 16px;
+  border-bottom: solid 2px #cee9eb;
+  transition: all 0.23s ease-in;
+  text-align: center;
+}
+
+.login-form input:focus {
+  border-bottom: solid 2px #2c9fe2;
+  outline: none;
+}
+
+.login-form .error {
+  text-align: center;
+  margin: 5px 0;
+  padding: 5px 10px;
+  color: #c92c43;
+}
+
+.login.include {
+  height: 50px;
+}
+
+.online {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  border: 3px solid #2c9fe2;
+  border-radius: 12px;
+}
+
+.chat-room-container {
+  width: 75%;
+  height: 100%;
+}
+
+.online-item {
+  padding-left: 35px;
+  width: 100%;
+  height: 22px;
+  cursor: pointer;
+  transition: all 0.23s ease-in;
+  box-sizing: border-box;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.online-item:hover {
+  background-color: #eeeeee;
+}
+
+.chat-room {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-name {
+  border: 3px solid #2c9fe2;
+  border-radius: 12px;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Message input */
+
+.message-input {
+  height: 50px;
+  min-height: 50px;
+  width: 100%;
+  border: 3px solid #2c9fe2;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.message-input .message-form {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.message-input .message-form .form-control:focus {
+  outline: none;
+}
+
+.message-input .message-form .form-control {
+  padding-top: 18px;
+  padding-bottom: 18px;
+  resize: none;
+  padding-left: 15px;
+  box-sizing: border-box;
+  width: 80%;
+  height: 100%;
+  border: none;
+}
+
+.message-input .message-form .send {
+  width: 20%;
+  font-size: 1.25em;
+  text-align: center;
+  border: none;
+  height: 100%;
+  color: #fff;
+  background: #2c9fe2;
+  transition: all 0.35s ease-out;
+  cursor: pointer;
+}
+.message-input .message-form .send:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.message-input .message-form .send:hover {
+  opacity: 0.5;
+}
+
+/* Messages block */
+.thread-container {
+  flex-grow: 1;
+  overflow-y: scroll;
+  position: relative;
+  border: 3px solid #2c9fe2;
+  border-radius: 12px 0 0 12px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.thread-container .thread {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: rgb(65, 65, 65);
 }

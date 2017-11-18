@@ -13,7 +13,7 @@ class LoginForm extends Component {
   setUser = ({ user, isUser }) => {
     console.log(user, isUser);
     if (isUser) {
-      this.setError('Занято!');
+      this.setError('Name is busy!...');
     } else {
       this.setError('');
       this.props.setUser(user);
@@ -42,7 +42,7 @@ class LoginForm extends Component {
       <div className="login">
         <form onSubmit={this.handleSubmit} className="login-form">
           <label htmlFor="nickname">
-            <h2>Введите Логин</h2>
+            <h3>Enter your name</h3>
           </label>
           <input
             ref={input => {
@@ -52,7 +52,7 @@ class LoginForm extends Component {
             id="nickname"
             value={nickname}
             onChange={this.handleChange}
-            placeholder="Логин"
+            placeholder="Your name"
           />
           <div className="error">{error ? error : null}</div>
         </form>
