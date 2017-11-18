@@ -9,7 +9,8 @@ const {
   MESSAGE_RECIEVED,
   MESSAGE_SENT,
   TYPING,
-  ONLINE_USERS
+  ONLINE_USERS,
+  TYPING_REC
 } = require('../Events');
 
 const { createUser, createMessage, createChat } = require('../Action');
@@ -18,9 +19,15 @@ let connectedUsers = {
   dfsdf: { id: '261b661f-a1d9-47cc-beed-01b88bd8aaa5', name: 'Boris' }
 };
 
+let communityChat = createChat();
+
 module.exports = function(socket) {
   // console.log('\x1bc'); //clears console
   console.log('Socket Id:' + socket.id);
+
+  let sendMessageToChatFromUser;
+
+  let sendTypingFromUser;
 
   //Verify Username
   socket.on(VERIFY_USER, (nickname, callback) => {
@@ -35,6 +42,9 @@ module.exports = function(socket) {
   socket.on(USER_CONNECTED, user => {
     connectedUsers = addUser(connectedUsers, user);
     socket.user = user;
+
+    sendMessageToChatFromUser = sendMessageToChat(user.name);
+    sendTypingFromUser = sendTypingToChat(user.name);
 
     io.emit(USER_CONNECTED, connectedUsers);
     io.emit(ONLINE_USERS, connectedUsers);
@@ -52,15 +62,34 @@ module.exports = function(socket) {
     }
   });
 
-  //User logsout
-  socket.on(LOGOUT, () => {
-    connectedUsers = removeUser(connectedUsers, socket.user.name);
-    io.emit(USER_DISCONNECTED, connectedUsers);
-    console.log('Disconnect', connectedUsers);
+  //get online users
+  socket.emit(ONLINE_USERS, connectedUsers);
+
+  //Get Community Chat
+  socket.on(CHAT, callback => {
+    callback(communityChat);
   });
 
-  socket.emit(ONLINE_USERS, connectedUsers);
+  socket.on(MESSAGE_SENT, ({ chatId, message }) => {
+    sendMessageToChatFromUser(chatId, message);
+  });
+
+  socket.on(TYPING, ({ chatId, isTyping }) => {
+    sendTypingFromUser(chatId, isTyping);
+  });
 };
+
+function sendTypingToChat(user) {
+  return (chatId, isTyping) => {
+    io.emit(TYPING_REC, { user, isTyping });
+  };
+}
+
+function sendMessageToChat(sender) {
+  return (chatId, message) => {
+    io.emit(MESSAGE_RECIEVED, createMessage({ message, sender }));
+  };
+}
 
 function addUser(userList, user) {
   let newList = Object.assign({}, userList);
