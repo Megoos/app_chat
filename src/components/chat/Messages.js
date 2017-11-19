@@ -33,11 +33,9 @@ export default class Messages extends Component {
                   'right'}`}
               >
                 <div className="time">{mes.time}</div>
+                <div className="name">{mes.sender}</div>
 
-                <div className="data">
-                  <div className="name">{mes.sender}</div>
-                  <div className="message">{mes.message}</div>
-                </div>
+                <div className="message">{mes.message}</div>
               </div>
             );
           })}

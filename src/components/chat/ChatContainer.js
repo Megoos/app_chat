@@ -108,9 +108,7 @@ class ChatConainer extends Component {
             />
           </div>
         ) : (
-          <div className="chat-room choose">
-            <h3>Chat is null</h3>
-          </div>
+          <div />
         )}
       </div>
     );
