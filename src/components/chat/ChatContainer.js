@@ -16,7 +16,8 @@ class ChatConainer extends Component {
 
     this.state = {
       chats: [],
-      activeChat: null
+      activeChat: null,
+      valueInput: ''
     };
   }
 
@@ -54,7 +55,7 @@ class ChatConainer extends Component {
   /*Updates typing chat*/
   updateTypingInChat = chatId => {
     return ({ isTyping, user }) => {
-      if (user !== this.props.user.name) {
+      if (!this.props.user || user !== this.props.user.name) {
         const { chats } = this.state;
 
         let newChats = chats.map(chat => {
@@ -84,9 +85,22 @@ class ChatConainer extends Component {
     socket.emit(TYPING, { chatId, isTyping });
   };
 
+  setValueInput = value => {
+    const { user } = this.props;
+
+    if (user) {
+      console.log(value);
+      this.setState({ valueInput: `@${value} ` });
+    }
+  };
+
+  resetValuInput = () => {
+    this.setState({ valueInput: '' });
+  };
+
   render() {
     const { user } = this.props;
-    const { activeChat } = this.state;
+    const { activeChat, valueInput } = this.state;
     return (
       <div className="chat-room-container">
         {activeChat !== null ? (
@@ -96,6 +110,7 @@ class ChatConainer extends Component {
               messages={activeChat.messages}
               user={user}
               typingUsers={activeChat.typingUsers}
+              onClickUser={this.setValueInput}
             />
             <MessageInput
               sendMessage={message => {
@@ -105,6 +120,8 @@ class ChatConainer extends Component {
                 this.sendTyping(activeChat.id, isTyping);
               }}
               user={user}
+              valInput={valueInput}
+              resetInput={this.resetValuInput}
             />
           </div>
         ) : (

@@ -20,6 +20,12 @@ export default class Messages extends Component {
     this.scrollDown();
   }
 
+  handleClickSender = e => {
+    const { onClickUser } = this.props;
+
+    onClickUser(e.target.textContent);
+  };
+
   render() {
     const { messages, user, typingUsers } = this.props;
     return (
@@ -29,13 +35,22 @@ export default class Messages extends Component {
             return (
               <div
                 key={mes.id}
-                className={`message-container ${mes.sender === user.name &&
-                  'right'}`}
+                className={`message-container ${user
+                  ? mes.sender === user.name && 'right'
+                  : ''} ${user
+                  ? mes.message.indexOf(`@${user.name} `) + 1 && 'you'
+                  : ''}`}
               >
                 <div className="time">{mes.time}</div>
-                <div className="name">{mes.sender}</div>
+                <div
+                  ref="sender"
+                  className="name"
+                  onClick={this.handleClickSender}
+                >
+                  {mes.sender}
+                </div>
 
-                <div className="message">{mes.message}</div>
+                <div className={`message`}>{mes.message}</div>
               </div>
             );
           })}

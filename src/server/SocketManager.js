@@ -15,13 +15,7 @@ const {
 
 const { createUser, createMessage, createChat } = require('../Action');
 
-let connectedUsers = {
-  dfsdf: { id: '261b661f-a1d9-47cc-beed-01b88bd8aaa5', name: 'Boris' },
-  dfsdf: { id: '261b661f-a1d9-47cc-beed-01b88bd8aaa5', name: 'Boris' },
-  dfsdf: { id: '261b661f-a1d9-47cc-beed-01b88bd8aaa5', name: 'Boris' },
-  dfsdf: { id: '261b661f-a1d9-47cc-beed-01b88bd8aaa5', name: 'Boris' },
-  dfsdf: { id: '261b661f-a1d9-47cc-beed-01b88bd8aaa5', name: 'Boris' }
-};
+let connectedUsers = {};
 
 let communityChat = createChat();
 

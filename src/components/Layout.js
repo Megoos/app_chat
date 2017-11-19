@@ -47,7 +47,10 @@ class Layout extends Component {
           {!user ? (
             <LoginForm socket={socket} setUser={this.setUser} />
           ) : (
-            <div className="login include">Your name: {user.name}</div>
+            <div className="login include">
+              Your name:
+              <div className="name">{user.name}</div>
+            </div>
           )}
 
           <OnlineUsers socket={socket} user={user} />
