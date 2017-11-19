@@ -18,7 +18,7 @@ To run, use the commands:
 Start React dev server:
 ### `yarn start`
 
-Start NodeJS Socket.io server
+Start NodeJS Socket.io server:
 ### `yarn server`
 
-**Open `http://localhost:3000` to view it in the browser.**
+**Open `http://localhost:3000` to view in the browser.**

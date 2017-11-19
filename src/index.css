@@ -11,6 +11,7 @@ body,
   align-items: center;
   width: 100%;
   min-width: 470px;
+  min-height: 400px;
 }
 
 input,
@@ -69,6 +70,7 @@ textarea {
   border: 3px solid #2c9fe2;
   border-radius: 12px;
   margin-bottom: 10px;
+  overflow: hidden;
 }
 
 .login-form {
@@ -126,6 +128,7 @@ textarea {
   width: 100%;
   border: 3px solid #2c9fe2;
   border-radius: 12px;
+  overflow: hidden;
 }
 
 .chat-room-container {
