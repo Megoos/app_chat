@@ -1,10 +1,10 @@
 const io = require('./index.js').io;
+const { createUser, createMessage, createChat } = require('../Action');
 
 const {
   VERIFY_USER,
   USER_CONNECTED,
   USER_DISCONNECTED,
-  LOGOUT,
   CHAT,
   MESSAGE_RECIEVED,
   MESSAGE_SENT,
@@ -12,8 +12,6 @@ const {
   ONLINE_USERS,
   TYPING_REC
 } = require('../Events');
-
-const { createUser, createMessage, createChat } = require('../Action');
 
 let connectedUsers = {};
 
@@ -30,9 +28,9 @@ module.exports = function(socket) {
   //Verify Username
   socket.on(VERIFY_USER, (nickname, callback) => {
     if (isUser(connectedUsers, nickname)) {
-      callback({ isUser: true, user: null });
+      callback({ user: null, isUser: true });
     } else {
-      callback({ isUser: false, user: createUser({ name: nickname }) });
+      callback({ user: createUser({ name: nickname }), isUser: false });
     }
   });
 
@@ -89,14 +87,18 @@ function sendMessageToChat(sender) {
   };
 }
 
+// function addUser(userList, user) {
+//   let newList = Object.assign({}, userList);
+//   newList[user.name] = user;
+//   return newList;
+// }
+
 function addUser(userList, user) {
-  let newList = Object.assign({}, userList);
-  newList[user.name] = user;
-  return newList;
+  return { ...userList, [user.name]: user };
 }
 
 function removeUser(userList, username) {
-  let newList = Object.assign({}, userList);
+  let newList = { ...userList };
   delete newList[username];
   return newList;
 }

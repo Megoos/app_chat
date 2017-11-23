@@ -30,7 +30,6 @@ class Layout extends Component {
   };
 
   // инициализация юзера
-
   setUser = user => {
     const { socket } = this.state;
     socket.emit(USER_CONNECTED, user);

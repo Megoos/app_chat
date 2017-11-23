@@ -14,17 +14,7 @@ const createChat = (
   name,
   messages,
   users,
-  typingUsers: [],
-
-  addMessage: (messages, message) => {
-    return [...messages, message];
-  },
-  addTypingUser: (typingUsers, username) => {
-    return [...typingUsers, username];
-  },
-  removeTypingUser: (typingUsers, username) => {
-    return typingUsers.filter(u => u === username);
-  }
+  typingUsers: []
 });
 
 //create message
